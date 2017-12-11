@@ -19,7 +19,7 @@ class WC_Fetchr_Product_Shipping_Method extends WC_Shipping_Method{
         // Define user set variables
         $this->enabled   = $this->get_option( 'fetchr_enabled' );
         $this->title         = $this->get_option( 'fetchr_title' );
-
+        $this->price = $this->get_option('fetchr_price');
 
         add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) ); // Updating Shipping setting fields values
 
@@ -60,7 +60,14 @@ class WC_Fetchr_Product_Shipping_Method extends WC_Shipping_Method{
                 'description'     => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
                 'default'     => __( 'Fetchr Shipping', 'woocommerce' ),
 
-            )
+            ),
+            'fetchr_price' => array(
+                'title'       => __( 'Shipping Price', 'woocommerce' ),
+                'type'            => 'text',
+                'description'     => __( 'Type shipping price, default price 100', 'woocommerce' ),
+                'default'     => '100',
+
+            ),
         );
     }
 
@@ -72,7 +79,7 @@ class WC_Fetchr_Product_Shipping_Method extends WC_Shipping_Method{
         $this->add_rate( array(
             'id'  => $this->id,
             'label' => $this->title,
-            'cost'    => '200'
+            'cost'    => $this->price,
         ));
         // This will add custom cost to shipping method
     }
