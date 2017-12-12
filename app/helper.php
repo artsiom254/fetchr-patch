@@ -1,7 +1,7 @@
 <?php
 
 function fetchr_custom_processing($order_id){
- if (get_option('woocommerce_wc_fetchr_shipping_method_settings')['fetchr_enabled'] === 'yes'){
+ if (get_option('woocommerce_wc_fetchr_shipping_method_settings')['enabled'] === 'yes'){
      $server_url = "http://dev.menavip.com/";
 
      if (get_option('mena_is_production') == "1")
